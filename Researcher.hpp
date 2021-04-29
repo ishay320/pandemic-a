@@ -3,14 +3,14 @@
 
 namespace pandemic
 {
-    class FieldDoctor
+    class Researcher
     {
     private:
         /* data */
     public:
         void build();
-        FieldDoctor(Board board, City city);
-        ~FieldDoctor();
+        Researcher(Board board, City city);
+        ~Researcher();
     };
 
 }

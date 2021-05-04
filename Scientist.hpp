@@ -1,16 +1,16 @@
 #include "Board.hpp"
 #include "City.hpp"
+#include "Player.hpp"
 
-namespace pandemic
-{
-    class Scientist
-    {
+namespace pandemic {
+class Scientist : public Player {
     private:
-        /* data */
+        int number;
     public:
-        void build();
-        Scientist(Board board, City city);
-        ~Scientist();
-    };
-
+        Scientist(Board& b, City c, int n): Player(b, c, "Scientist") 
+        {
+            number = n;
+        }
+        Player& discover_cure(Color c) override;
+};
 }

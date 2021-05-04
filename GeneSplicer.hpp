@@ -1,16 +1,14 @@
+#pragma once
 #include "Board.hpp"
 #include "City.hpp"
-
+#include "Player.hpp"
 namespace pandemic
 {
-    class GeneSplicer
+    class GeneSplicer : public Player
     {
-    private:
-        /* data */
-    public:
-        void build();
-        GeneSplicer(Board board, City city);
-        ~GeneSplicer();
-    };
 
+    public:
+        GeneSplicer(Board &b, City c) : Player(b, c, "GeneSplicer") {}
+        Player &discover_cure(Color c) override;
+    };
 }

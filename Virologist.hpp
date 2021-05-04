@@ -1,16 +1,14 @@
 #include "Board.hpp"
 #include "City.hpp"
+#include "Player.hpp"
 
 namespace pandemic
 {
-    class Virologist
+    class Virologist : public Player
     {
-    private:
-        /* data */
-    public:
-        void build();
-        Virologist(Board board, City city);
-        ~Virologist();
-    };
 
+    public:
+        Virologist(Board &b, City c) : Player(b, c, "Virologist") {}
+        Player &treat(City c) override;
+    };
 }

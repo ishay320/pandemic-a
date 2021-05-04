@@ -1,16 +1,15 @@
+#pragma once
 #include "Board.hpp"
 #include "City.hpp"
+#include "Player.hpp"
 
 namespace pandemic
 {
-    class Dispatcher
+    class Dispatcher : public Player
     {
-    private:
-        /* data */
-    public:
-        void build();
-        Dispatcher(Board board, City city);
-        ~Dispatcher();
-    };
 
+    public:
+        Dispatcher(Board &b, City c) : Player(b, c, "Dispatcher") {}
+        Player &fly_direct(City c) override;
+    };
 }

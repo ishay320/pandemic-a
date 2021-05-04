@@ -1,16 +1,14 @@
+#pragma once
 #include "Board.hpp"
 #include "City.hpp"
-
+#include "Player.hpp"
 namespace pandemic
 {
-    class FieldDoctor
+    class FieldDoctor : public Player
     {
-    private:
-        /* data */
-    public:
-        void build();
-        FieldDoctor(Board board, City city);
-        ~FieldDoctor();
-    };
 
+    public:
+        FieldDoctor(Board &b, City c) : Player(b, c, "FieldDoctor") {}
+        Player &treat(City c) override;
+    };
 }

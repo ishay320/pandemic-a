@@ -1,19 +1,21 @@
+#pragma once
+#include "Color.hpp"
 #include "City.hpp"
+#include <map>
+using namespace std;
 
-#include <iostream>
 namespace pandemic
 {
     class Board
     {
     private:
-        /* data */
-    public:
-        Board(/* args */);
-        bool is_clean();
-        void operator[](City city);
-        void operator=(int num);
-        friend std::ostream &operator<<(std::ostream &os, Board &board);
-        ~Board();
-    };
+        map<City, int> lvl_of_disease;
 
+    public:
+        Board() {}
+        void remove_cures();
+        bool is_clean();
+        int &operator[](City city);
+        friend std::ostream &operator<<(std::ostream &out, const Board &b);
+    };
 }

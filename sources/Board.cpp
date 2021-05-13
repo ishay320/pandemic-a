@@ -115,9 +115,15 @@ namespace pandemic
     }
     bool Board::hasNeighbor(const City origin, const City neighbor) const
     {
+        if (neighbors.at(origin).find(neighbor) != neighbors.at(origin).end())
+        {
+            return true;
+        }
+        return false;
     }
     void Board::BuildResearchStation(const City city)
     {
+        researchStation[city] = true;
     }
     void Board::discover_cure(const Color color)
     {
@@ -137,14 +143,30 @@ namespace pandemic
     }
     bool Board::is_clean()
     {
+        for (auto i : diseaseLvl)
+        {
+            if (i.second != 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     void Board::remove_cures()
     {
+        cures.fill(false);
     }
     void Board::remove_stations()
     {
+        for (auto i : researchStation)
+        {
+            researchStation.at(i.first) = false;
+        }
     }
+
+    //TODO
     std::ostream &operator<<(std::ostream &out, const Board &b)
     {
+        return out;
     }
 }

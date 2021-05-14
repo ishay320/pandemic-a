@@ -20,11 +20,11 @@ namespace pandemic
             }
             else if (i < red)
             {
-                cityColor[city] = Color::Black;
+                cityColor[city] = Color::Yellow;
             }
             else if (i < black)
             {
-                cityColor[city] = Color::Yellow;
+                cityColor[city] = Color::Black;
             }
             else
             {
@@ -100,10 +100,10 @@ namespace pandemic
 
         //city names by order
         cityName = {
-            "London", "Madrid", "Paris", "Milan", "Essen", "NewYork", "Montreal", "Chicago", "SanFrancisco", "Atlanta", "Washington", "StPetersburg",
-            "Baghdad", "Tehran", "Riyadh", "Karachi", "Delhi", "Moscow", "Istanbul", "Algiers", "Cairo", "Mumbai", "Kolkata", "Chennai",
-            "Bogota", "Lima", "Santiago", "BuenosAires", "SaoPaulo", "MexicoCity", "Miami", "LosAngeles", "Lagos", "Khartoum", "Kinshasa", "Johannesburg",
-            "Beijing", "Bangkok", "Jakarta", "HoChiMinhCity", "Manila", "Sydney", "Seoul", "Tokyo", "HongKong", "Shanghai", "Taipei", "Osaka"};
+            "NewYork", "Montreal", "Chicago", "SunFrancisco", "Atlanta", "Washington", "London", "Madrid", "Paris", "Milan", "Essen", "ST_Petersburg",
+            "MexicoCity", "Miami", "LosAngeles", "Bogota", "Lima", "Santiago", "BuenosAires", "SaoPaulo", "Lagos", "Khartoum", "Kinshasa", "Johannesburg",
+            "Moscow", "Istanbul", "Algiers", "Cairo", "Baghdad", "Tehran", "Riyadh", "Karachi", "Delhi", "Mumbai", "Kolcata", "Chennai",
+            "Beijing", "Seoul", "Tokyo", "HongKong", "Shanghai", "Taipei", "Osaka", "Bangkok", "Jakarta", "HoChiMinhCity", "Manila", "Sydney"};
     }
     const std::string Board::getColorName(const Color a) const
     {

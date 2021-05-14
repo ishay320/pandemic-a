@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include "City.hpp"
 #include <exception>
+#include <iostream>
 
 using namespace pandemic;
 
@@ -101,30 +102,31 @@ Player &Player::discover_cure(Color c)
     }
 
     //check 5 cards with same color
-    int count = 0;
-    set<City> tmp;
-    for (auto it : cards)
+    size_t count = 0;
+    array<City, 5> tmp = {};
+    for (const auto &it : cards)
     {
         if (board.getColor(it) == c)
         {
-            tmp.insert(it);
+            tmp.at(count) = it;
             count++;
+            if (count == 5)
+            {
+                break;
+            }
         }
     }
     if (count < 5)
     {
         string e;
-        e.append("you dont have enough ").append(board.getColorName(c)).append(" cards, you have only ");
-        e += count;
+        e.append("you dont have enough ").append(board.getColorName(c)).append(" cards, you have ").append(to_string(count));
         throw invalid_argument(e);
     }
     board.discover_cure(c);
     //remove 5 first cards with c color
-    auto it = tmp.begin();
-    for (int i = 0; i < 5; i++)
+    for (auto it : tmp)
     {
-        cards.erase(*it);
-        ++it;
+        cards.erase(it);
     }
     return *this;
 }
@@ -149,4 +151,21 @@ Player &Player::treat(City c)
 void Player::remove_cards()
 {
     cards.clear();
+}
+// ostream &operator<<(std::ostream &out, const Player &p)
+// {
+//     out << "{";
+//     for (const auto &it : p.cards)
+//     {
+//         out << p.board.getName(it) << ",";
+//     }
+//     out << "}";
+//     return out;
+// }
+void Player::print_cards()
+{
+    for (const auto &it : cards)
+    {
+        std::cout << board.getName(it) << ", ";
+    }
 }

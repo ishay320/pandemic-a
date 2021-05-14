@@ -4,5 +4,9 @@ using namespace pandemic;
 
 Player &Dispatcher::fly_direct(City c)
 {
-    return *this;
+
+}
+std::string Dispatcher::role() const
+{
+    return "Dispatcher";
 }

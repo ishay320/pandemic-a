@@ -127,7 +127,7 @@ namespace pandemic
     }
     void Board::discover_cure(const Color color)
     {
-        cures.fill(false);
+        cures.at((size_t)color) = true;
     }
     std::string Board::getName(const City city) const
     {

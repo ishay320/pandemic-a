@@ -7,7 +7,7 @@ namespace pandemic
 {
     class Player
     {
-    private:
+    protected:
         Board &board;
         City cityNow;
         std::set<City> cards;

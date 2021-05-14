@@ -130,6 +130,10 @@ Player &Player::discover_cure(Color c)
 }
 Player &Player::treat(City c)
 {
+    if (cityNow != c)
+    {
+        throw invalid_argument("you are not in the same city");
+    }
     if (board[c] == 0)
     {
         throw invalid_argument("the city is cured already");

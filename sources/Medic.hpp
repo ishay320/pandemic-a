@@ -16,7 +16,6 @@ namespace pandemic
         Player &fly_direct(City c) override;
         Player &fly_charter(City c) override;
         Player &fly_shuttle(City c) override;
-        Player &discover_cure(Color c) override;
         Player &treat(City c) override;
         std::string role() const override;
     };

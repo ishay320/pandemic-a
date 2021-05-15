@@ -120,12 +120,6 @@ Player &Player::discover_cure(Color c)
     if (count < cardNum)
     {
         string e;
-        // e.append("your cards are :");
-        // for (const auto &it : cards)
-        // {
-        //     e.append(board.getName(it)).append(to_string((int)board.getColor(it))).append(",");
-        // }
-        // e.append("}").append(to_string((int)c));
         e.append("you dont have enough ").append(board.getColorName(c)).append(" cards, you have ").append(to_string(count));
         throw invalid_argument(e);
     }
@@ -160,7 +154,7 @@ void Player::remove_cards()
     cards.clear();
 }
 
-string Player::print_cards(string e ,Color c)
+string Player::print_cards(string e, Color c)
 {
     e.append("your cards are :");
     for (const auto &it : cards)
@@ -170,11 +164,33 @@ string Player::print_cards(string e ,Color c)
     e.append("}").append(to_string((int)c)).append("\n").append("city now:").append(board.getName(cityNow));
     if (board.hasResearchStation(cityNow))
     {
-       e.append(" hasResearchStation ");
-    }else{
-               e.append(" NOThasResearchStation ");
-
+        e.append(" hasResearchStation ");
     }
-    
+    else
+    {
+        e.append(" NOThasResearchStation ");
+    }
+
     return e;
+}
+std::set<string> Player::getCards() const
+{
+    std::set<string> tmp;
+    for (auto it : cards)
+    {
+        tmp.insert(board.getName(it));
+    }
+
+    return tmp;
+}
+std::ostream &operator<<(std::ostream &out, const Player &p)
+{
+    out << "role: " << p.role() << endl;
+    out << "cards:[";
+    for (const auto &it : p.getCards())
+    {
+        out << it << ",";
+    }
+    out << "]";
+    return out;
 }

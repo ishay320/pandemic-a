@@ -10,6 +10,8 @@ Player &Researcher::discover_cure(Color c)
 
     //check 5 cards with same color
     int count = 0;
+    const int cardNum = 5;
+
     set<City> tmp;
     for (auto it : cards)
     {
@@ -19,7 +21,7 @@ Player &Researcher::discover_cure(Color c)
             count++;
         }
     }
-    if (count < 5)
+    if (count < cardNum)
     {
         string e;
         e.append("you dont have enough ").append(board.getColorName(c)).append(" cards, you have only ").append(to_string(count));
@@ -29,7 +31,7 @@ Player &Researcher::discover_cure(Color c)
     board.discover_cure(c);
     //remove 5 first cards with c color
     auto it = tmp.begin();
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < cardNum; i++)
     {
         cards.erase(*it);
         ++it;

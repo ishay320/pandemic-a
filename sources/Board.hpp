@@ -21,7 +21,7 @@ namespace pandemic
 
     public:
         Board();
-        const std::string getColorName(const Color a) const;
+        std::string getColorName(const Color a) const;
         Color getColor(const City city) const;
         bool hasNeighbor(const City origin, const City neighbor) const;
         inline bool hasResearchStation(const City city) const { return researchStation.at(city); }

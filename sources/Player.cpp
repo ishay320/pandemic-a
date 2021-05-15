@@ -31,7 +31,7 @@ Player &Player::fly_direct(City c)
     if (it == cards.end())
     {
         string e;
-        e.append(board.getName(c)).append(" is not found in your cards");
+        e.append(board.getName(c)).append(" is not found in your cards(player class)");
         throw invalid_argument(e);
     }
     cityNow = c;
@@ -103,22 +103,29 @@ Player &Player::discover_cure(Color c)
 
     //check 5 cards with same color
     size_t count = 0;
-    array<City, 5> tmp = {};
+    const int cardNum = 5;
+    array<City, cardNum> tmp = {};
     for (const auto &it : cards)
     {
         if (board.getColor(it) == c)
         {
             tmp.at(count) = it;
             count++;
-            if (count == 5)
+            if (count == cardNum)
             {
                 break;
             }
         }
     }
-    if (count < 5)
+    if (count < cardNum)
     {
         string e;
+        // e.append("your cards are :");
+        // for (const auto &it : cards)
+        // {
+        //     e.append(board.getName(it)).append(to_string((int)board.getColor(it))).append(",");
+        // }
+        // e.append("}").append(to_string((int)c));
         e.append("you dont have enough ").append(board.getColorName(c)).append(" cards, you have ").append(to_string(count));
         throw invalid_argument(e);
     }
@@ -152,20 +159,22 @@ void Player::remove_cards()
 {
     cards.clear();
 }
-// ostream &operator<<(std::ostream &out, const Player &p)
-// {
-//     out << "{";
-//     for (const auto &it : p.cards)
-//     {
-//         out << p.board.getName(it) << ",";
-//     }
-//     out << "}";
-//     return out;
-// }
-void Player::print_cards()
+
+string Player::print_cards(string e ,Color c)
 {
+    e.append("your cards are :");
     for (const auto &it : cards)
     {
-        std::cout << board.getName(it) << ", ";
+        e.append(board.getName(it)).append(to_string((int)board.getColor(it))).append(",");
     }
+    e.append("}").append(to_string((int)c)).append("\n").append("city now:").append(board.getName(cityNow));
+    if (board.hasResearchStation(cityNow))
+    {
+       e.append(" hasResearchStation ");
+    }else{
+               e.append(" NOThasResearchStation ");
+
+    }
+    
+    return e;
 }

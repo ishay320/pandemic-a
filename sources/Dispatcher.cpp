@@ -1,5 +1,6 @@
 #include "Dispatcher.hpp"
 #include "Player.hpp"
+
 using namespace pandemic;
 
 Player &Dispatcher::fly_direct(City c)
@@ -14,14 +15,14 @@ Player &Dispatcher::fly_direct(City c)
         return *this;
     }
     //if is not in Research Station so normal
-    auto it = cards.find(cityNow);
+    auto it = cards.find(c);
     if (it == cards.end())
     {
-        string e;
+        string e ;
         e.append(board.getName(cityNow)).append(" is not found in your cards");
         throw invalid_argument(e);
     }
-    cards.erase(cityNow);
+    cards.erase(c);
     cityNow = c;
     return *this;
 }

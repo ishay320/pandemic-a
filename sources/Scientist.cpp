@@ -28,8 +28,7 @@ Player &Scientist::discover_cure(Color c)
     if (count < number)
     {
         string e;
-        e.append("you dont have enough ").append(board.getColorName(c)).append(" cards, you have only ");
-        e += count;
+        e.append("you dont have enough ").append(board.getColorName(c)).append(" cards, you have only ").append(to_string(count));
         throw invalid_argument(e);
     }
     board.discover_cure(c);

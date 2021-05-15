@@ -1,24 +1,23 @@
 #include "Board.hpp"
+#include <iostream>
 
 namespace pandemic
 {
-    Board::Board()
+    Board::Board():cures({false, false, false, false})
     {
-        //fill the cures
-        cures = {false, false, false, false};
         //fill the colors
+        const int blue = 12;
+        const int yellow = 24;
+        const int black = 36;
         const int cityNum = 48;
-        const int red = 36;
-        const int black = 24;
-        const int yellow = 12;
         for (int i = 0; i < cityNum; ++i)
         {
             City city = static_cast<City>(i);
-            if (i < yellow)
+            if (i < blue)
             {
                 cityColor[city] = Color::Blue;
             }
-            else if (i < red)
+            else if (i < yellow)
             {
                 cityColor[city] = Color::Yellow;
             }
@@ -105,7 +104,7 @@ namespace pandemic
             "Moscow", "Istanbul", "Algiers", "Cairo", "Baghdad", "Tehran", "Riyadh", "Karachi", "Delhi", "Mumbai", "Kolcata", "Chennai",
             "Beijing", "Seoul", "Tokyo", "HongKong", "Shanghai", "Taipei", "Osaka", "Bangkok", "Jakarta", "HoChiMinhCity", "Manila", "Sydney"};
     }
-    const std::string Board::getColorName(const Color a) const
+    std::string Board::getColorName(const Color a) const
     {
         return colorName.at(a);
     }
@@ -115,11 +114,7 @@ namespace pandemic
     }
     bool Board::hasNeighbor(const City origin, const City neighbor) const
     {
-        if (neighbors.at(origin).find(neighbor) != neighbors.at(origin).end())
-        {
-            return true;
-        }
-        return false;
+        return neighbors.at(origin).find(neighbor) != neighbors.at(origin).end();
     }
     void Board::BuildResearchStation(const City city)
     {
@@ -164,9 +159,17 @@ namespace pandemic
         }
     }
 
-    //TODO
-    std::ostream &operator<<(std::ostream &out, const Board &b)
+    ostream &operator<<(ostream &out, const Board &b)
     {
+        out << "Board:[";
+        int i = 0;
+        for (const auto &iter : b.cityName)
+        {
+            out << iter << ":" << i << "{" << b.hasResearchStation(static_cast<City>(i)) << "}"
+                << ",";
+            i++;
+        }
+        out << "]";
         return out;
     }
 }

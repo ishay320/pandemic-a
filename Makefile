@@ -57,3 +57,4 @@ valgrind: test1
 clean:
 	rm -f $(OBJECTS) *.o test* demo*
 	rm -f StudentTest*.cpp
+	rm -f main

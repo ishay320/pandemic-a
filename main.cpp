@@ -94,7 +94,7 @@ int main(int argc, char const *argv[])
         cout << "8-Virologist" << endl;
         int choice;
         cin >> choice;
-        int seed = 1;
+        int seed = rand(); 
         if (choice == 1)
         {
             Dispatcher *dispatcher = new Dispatcher(board, randomCity(seed));

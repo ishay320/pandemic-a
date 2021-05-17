@@ -166,8 +166,8 @@ namespace pandemic
         const int lineJumps = 5;
         for (const auto &iter : b.cityName)
         {
-            out << iter << "{RS=" << b.hasResearchStation(static_cast<City>(i)) << "} "
-                << ",";
+            out << iter << "{RS=" << b.hasResearchStation(static_cast<City>(i)) << "}"
+                <<"{diseaseLvl:"<<b.diseaseLvl.at(static_cast<City>(i))<< "}, ";
             i++;
 
             if (i % lineJumps == 0)

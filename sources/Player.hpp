@@ -33,7 +33,7 @@ namespace pandemic
          * @return std::ostream& 
          */
         friend std::ostream &operator<<(std::ostream &out, const Player &p);
-        string print_cards(string, Color c);
+        string print_cards(string);
         std::set<string> getCards() const;
     };
 }

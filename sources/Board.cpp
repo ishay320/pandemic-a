@@ -3,7 +3,7 @@
 
 namespace pandemic
 {
-    Board::Board():cures({false, false, false, false})
+    Board::Board() : cures({false, false, false, false})
     {
         //fill the colors
         const int blue = 12;
@@ -161,15 +161,20 @@ namespace pandemic
 
     ostream &operator<<(ostream &out, const Board &b)
     {
-        out << "Board:[";
+        out << "Board:  ";
         int i = 0;
+        const int lineJumps = 5;
         for (const auto &iter : b.cityName)
         {
-            out << iter << ":" << i << "{" << b.hasResearchStation(static_cast<City>(i)) << "}"
+            out << iter << "{RS=" << b.hasResearchStation(static_cast<City>(i)) << "} "
                 << ",";
             i++;
+
+            if (i % lineJumps == 0)
+            {
+                out << endl;
+            }
         }
-        out << "]";
         return out;
     }
 }

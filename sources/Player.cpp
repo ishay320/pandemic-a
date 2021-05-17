@@ -31,7 +31,7 @@ Player &Player::fly_direct(City c)
     if (it == cards.end())
     {
         string e;
-        e.append(board.getName(c)).append(" is not found in your cards(player class)");
+        e.append(board.getName(c)).append(" is not found in your cards");
         throw invalid_argument(e);
     }
     cityNow = c;
@@ -154,21 +154,21 @@ void Player::remove_cards()
     cards.clear();
 }
 
-string Player::print_cards(string e, Color c)
+string Player::print_cards(string e)
 {
     e.append("your cards are :");
     for (const auto &it : cards)
     {
-        e.append(board.getName(it)).append(to_string((int)board.getColor(it))).append(",");
+        e.append(board.getName(it)).append("-").append(board.getColorName(board.getColor(it))).append(", ");
     }
-    e.append("}").append(to_string((int)c)).append("\n").append("city now:").append(board.getName(cityNow));
+    e.append("\n").append("city now: ").append(board.getName(cityNow));
     if (board.hasResearchStation(cityNow))
     {
-        e.append(" hasResearchStation ");
+        e.append(" have ResearchStation ");
     }
     else
     {
-        e.append(" NOThasResearchStation ");
+        e.append(" dont have ResearchStation ");
     }
 
     return e;

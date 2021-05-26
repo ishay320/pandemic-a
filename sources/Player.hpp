@@ -35,5 +35,6 @@ namespace pandemic
         friend std::ostream &operator<<(std::ostream &out, const Player &p);
         string print_cards(string);
         std::set<string> getCards() const;
+        inline City getCityNow() { return cityNow; }
     };
 }

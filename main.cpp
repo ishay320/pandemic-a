@@ -52,6 +52,24 @@ void fillDeck(queue<City> deck)
         }
     }
 }
+
+City getNeighborCity(Board b, City cityNow)
+{
+    cout << "choose city:\n";
+    int lines = 0;
+    for (size_t i = 0; i < cityCount; i++)
+    {
+        if (b.hasNeighbor(cityNow, static_cast<City>(i)))
+        {
+            cout << i << "-" << b.getName(static_cast<City>(i)) << "        ";
+            if (lines++ % 3 == 0)
+                cout << endl;
+        }
+    }
+    int tmp;
+    cin >> tmp;
+    return static_cast<City>(tmp);
+}
 City getCity(Board b)
 {
     cout << "choose city:\n";
@@ -70,12 +88,12 @@ int main(int argc, char const *argv[])
 
     //start game board
     Board board;
-    //add Research Stations 
+    //add Research Stations
     for (size_t i = 0; i < 16; i++)
     {
         board.BuildResearchStation(randomCity(i));
     }
-    
+
     //add players to the board
     cout << "how many players?" << endl;
     int playerCount = 1;
@@ -94,7 +112,7 @@ int main(int argc, char const *argv[])
         cout << "8-Virologist" << endl;
         int choice;
         cin >> choice;
-        int seed = rand(); 
+        int seed = rand();
         if (choice == 1)
         {
             Dispatcher *dispatcher = new Dispatcher(board, randomCity(seed));
@@ -161,19 +179,20 @@ int main(int argc, char const *argv[])
     while (gameOn)
     {
         cout << endl
-            << "player num " << playerNow % playerCount << endl;
+             << "player num " << playerNow % playerCount << " -role- " << players.front()->role() << endl;
         cout << "choose move:" << endl;
 
         cout << "0-take_card+end_turn" << endl;
-        cout << "1-fly_direct" << endl;
-        cout << "2-fly_charter" << endl;
-        cout << "3-fly_shuttle" << endl;
-        cout << "4-build" << endl;
-        cout << "5-discover_cure" << endl;
-        cout << "6-treat" << endl;
-        cout << "7-print_cards" << endl;
-        cout << "8-print_board" << endl;
-        cout << "9-end_turn" << endl;
+        cout << "1-drive" << endl;
+        cout << "2-fly_direct" << endl;
+        cout << "3-fly_charter" << endl;
+        cout << "4-fly_shuttle" << endl;
+        cout << "5-build" << endl;
+        cout << "6-discover_cure" << endl;
+        cout << "7-treat" << endl;
+        cout << "8-print_cards" << endl;
+        cout << "9-print_board" << endl;
+        cout << "10-end_turn" << endl;
 
         int choice;
         cin >> choice;
@@ -188,7 +207,22 @@ int main(int argc, char const *argv[])
             players.push(tmp);
             playerNow++;
         }
-        else if (choice == 1) //fly_direct
+        else if (choice == 1) //drive
+        {
+            cout << "where to drive?" << endl;
+            City city = getNeighborCity(board, players.front()->getCityNow());
+            Player *tmp = players.front();
+            try
+            {
+                tmp->drive(city);
+            }
+            catch (const std::exception &e)
+            {
+                std::cerr << e.what() << '\n';
+                cout << "try again\n";
+            }
+        }
+        else if (choice == 2) //fly_direct
         {
             cout << "where to fly_direct?" << endl;
             City city = getCity(board);
@@ -203,7 +237,7 @@ int main(int argc, char const *argv[])
                 cout << "try again\n";
             }
         }
-        else if (choice == 2) //fly_charter
+        else if (choice == 3) //fly_charter
         {
             cout << "where to fly_charter?" << endl;
             City city = getCity(board);
@@ -218,7 +252,7 @@ int main(int argc, char const *argv[])
                 cout << "try again\n";
             }
         }
-        else if (choice == 3) //fly_shuttle
+        else if (choice == 4) //fly_shuttle
         {
             cout << "where to fly_shuttle?" << endl;
             City city = getCity(board);
@@ -233,7 +267,7 @@ int main(int argc, char const *argv[])
                 cout << "try again\n";
             }
         }
-        else if (choice == 4) //build
+        else if (choice == 5) //build
         {
             cout << "building..." << endl;
             Player *tmp = players.front();
@@ -247,7 +281,7 @@ int main(int argc, char const *argv[])
                 cout << "try again" << endl;
             }
         }
-        else if (choice == 5) //discover_cure
+        else if (choice == 6) //discover_cure
         {
             cout << "what color?" << endl;
             cout << "0-Blue" << endl;
@@ -268,7 +302,7 @@ int main(int argc, char const *argv[])
                 cout << "try again\n";
             }
         }
-        else if (choice == 6) //treat
+        else if (choice == 7) //treat
         {
             cout << "where to treat?" << endl;
             City city = getCity(board);
@@ -283,18 +317,18 @@ int main(int argc, char const *argv[])
                 cout << "try again\n";
             }
         }
-        else if (choice == 7) //print_cards
+        else if (choice == 8) //print_cards
         {
             Player *tmp = players.front();
             string strTmp;
             strTmp = tmp->print_cards(strTmp);
             cout << strTmp << endl;
         }
-        else if (choice == 8) //print_board
+        else if (choice == 9) //print_board
         {
             cout << board << endl;
         }
-        else if (choice == 9) //end turn
+        else if (choice == 10) //end turn
         {
             Player *tmp = players.front();
             players.pop();
